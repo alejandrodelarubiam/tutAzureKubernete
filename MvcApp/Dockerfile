@@ -3,14 +3,14 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
 COPY "MvcApp.csproj" .
 RUN dotnet restore "MvcApp.csproj"
 COPY . .
 RUN dotnet build . -c Release -o /app/build
 
-FROM adelarubiam/tutazurerepo AS publish
+FROM build AS publish
 RUN dotnet publish "MvcApp.csproj" -c Release -o /app/publish
 
 FROM base AS final
