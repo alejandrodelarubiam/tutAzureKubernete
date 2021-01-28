@@ -10,7 +10,7 @@ RUN dotnet restore "MvcApp.csproj"
 COPY . .
 RUN dotnet build . -c Release -o /app/build
 
-FROM tutazurerepo AS publish
+FROM adelarubiam/tutazurerepo AS publish
 RUN dotnet publish "MvcApp.csproj" -c Release -o /app/publish
 
 FROM base AS final
